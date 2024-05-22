@@ -58,6 +58,7 @@ export async function run() {
       // @cert-authority entry is the mandatory entry. generate the entry based on the known_hosts entry key
       try {
         await execShellCommand('cat <(cat ~/.ssh/known_hosts | awk \'{ print "@cert-authority " $1 " " $2 " " $3 }\') >> ~/.ssh/known_hosts');
+        core.info(await execShellCommand('cat ~/.ssh/known_hosts'));
       } catch (error) {
         core.error(`error generating cert-authority entry. Error: ${error}`);
         throw error;
